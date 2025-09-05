@@ -271,11 +271,11 @@ def scrape_season(fixtures_url, sleep_range=(0.9, 1.8)):
 if __name__ == "__main__":
     # 1) Én kamp (du kan pege på lokal HTML-fil for test)
     # url = "Burnley vs. Manchester City Match Report – Friday August 11, 2023 _ FBref.com.html"
-    url = "https://fbref.com/en/matches/64c6b172/Bayern-Munich-Hertha-BSC-August-16-2019-Bundesliga"
+    url = "https://fbref.com/en/matches/845fc4ab/Bastia-Paris-Saint-Germain-August-12-2016-Ligue-1"
     df_one = scrape_match(url)
     print(df_one.head())
 
     # 2) Hel PL-sæson 23/24 → GEM SOM CSV (ikke Excel)
-    fixtures = "https://fbref.com/en/comps/20/2019-2020/schedule/2019-2020-Bundesliga-Scores-and-Fixtures"
+    fixtures = "https://fbref.com/en/comps/23/2024-2025/schedule/2024-2025-Eredivisie-Scores-and-Fixtures"
     df_season = scrape_season(fixtures)
-    df_season.to_excel("19_20.xlsx", index=False)
+    df_season.to_excel("Dutch Eredivisie/Raw/24_25.xlsx", index=False)
