@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import pickle
 import hashlib
-from lightgbm import LGBMRegressor
+from lightgbm import LGBMRegressor, early_stopping
 from sklearn.model_selection import train_test_split
 from scipy.special import softmax
 from Methods import methods
@@ -20,15 +20,42 @@ Y_train_home = Y[:, 0]   # Sandsynlighed for hjemmebanesejr
 Y_train_draw = Y[:, 1]   # Sandsynlighed for uafgjort
 Y_train_away = Y[:, 2]   # Sandsynlighed for udebanesejr
 
-# Initialiser modeller
-model_home = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42,verbose =-1)
-model_draw = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42,verbose =-1)
-model_away = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42,verbose =-1)
+# --- tidsbaseret split til validering (bevar kronologi) ---
+n = len(X)
+cut = int(n * 0.9)  # 90% træning, 10% validering
+X_tr, X_val = X[:cut], X[cut:]
+y_h_tr, y_h_val = Y_train_home[:cut], Y_train_home[cut:]
+y_d_tr, y_d_val = Y_train_draw[:cut], Y_train_draw[cut:]
+y_a_tr, y_a_val = Y_train_away[:cut], Y_train_away[cut:]
 
-# Træn modellerne
-model_home.fit(X, Y_train_home)
-model_draw.fit(X, Y_train_draw)
-model_away.fit(X, Y_train_away)
+# --- stærke, gennemtestede hyperparametre (fleksible men stabile) ---
+params = dict(
+    objective="l2",
+    n_estimators=10000,         # stor cap; stopper tidligt via early stopping
+    learning_rate=0.015,        # lav lr → præcise boosts
+    max_depth=-1,
+    num_leaves=127,             # mere kapacitet end 31/63
+    min_child_samples=40,       # tillad dybere splits
+    feature_fraction=0.85,
+    bagging_fraction=0.8,
+    bagging_freq=1,
+    reg_alpha=0.0,
+    reg_lambda=0.5,             # let L2 for stabilitet
+    max_bin=255,                # bedre opløsning til dine kontinuerte stats
+    device="gpu",
+    random_state=42,
+    verbose=-1
+)
+
+model_home = LGBMRegressor(**params)
+model_draw = LGBMRegressor(**params)
+model_away = LGBMRegressor(**params)
+
+callbacks = [early_stopping(stopping_rounds=300, verbose=False)]
+
+model_home.fit(X_tr, y_h_tr, eval_set=[(X_val, y_h_val)], callbacks=callbacks)
+model_draw.fit(X_tr, y_d_tr, eval_set=[(X_val, y_d_val)], callbacks=callbacks)
+model_away.fit(X_tr, y_a_tr, eval_set=[(X_val, y_a_val)], callbacks=callbacks)
 
 
 #Læs de originale statistikker
@@ -331,8 +358,8 @@ def predict_from_fixtures(fixtures_array: np.ndarray, calibrate: bool = True, de
 
     # Resultattabel
     out = pd.DataFrame({
-        "Hjemme": [m[0] for m in meta],
-        "Ude":    [m[1] for m in meta],
+        "Home": [m[0] for m in meta],
+        "Away":    [m[1] for m in meta],
         "Odds_H": odds[:, 0],
         "Odds_U": odds[:, 1],
         "Odds_A": odds[:, 2],

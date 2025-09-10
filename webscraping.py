@@ -276,6 +276,6 @@ if __name__ == "__main__":
     print(df_one.head())
 
     # 2) Hel PL-sæson 23/24 → GEM SOM CSV (ikke Excel)
-    fixtures = "https://fbref.com/en/comps/23/2024-2025/schedule/2024-2025-Eredivisie-Scores-and-Fixtures"
+    fixtures = "https://fbref.com/en/comps/11/2016-2017/schedule/2016-2017-Serie-A-Scores-and-Fixtures"
     df_season = scrape_season(fixtures)
     df_season.to_excel("Dutch Eredivisie/Raw/24_25.xlsx", index=False)

@@ -107,49 +107,46 @@ def load_elo_dict_pickle(path: str = "elo_dict.pkl") -> dict:
 
 # Byg dit dictionary (kun 12 netkald i alt for 2014–2025 pga. cache pr. år)
 add_team_elo(elo_dict, "Arsenal", "Arsenal", 2014, 2025)
-print(elo_dict["Arsenal"])
 add_team_elo(elo_dict, "Aston Villa", "Aston Villa", 2014, 2025)
 add_team_elo(elo_dict, "Bournemouth", "Bournemouth", 2014, 2025)
 add_team_elo(elo_dict, "Brentford", "Brentford", 2014, 2025)
 add_team_elo(elo_dict, "Brighton & Hove Albion", "Brighton", 2014, 2025)
 add_team_elo(elo_dict, "Burnley", "Burnley", 2014, 2025)
-print(elo_dict["Arsenal"])
 #add_team_elo(elo_dict, "Cardiff City", "Cardiff City", 2014, 2025) #mangler tilføj selv
 add_team_elo(elo_dict, "Chelsea", "Chelsea", 2014, 2025)
 add_team_elo(elo_dict, "Crystal Palace", "Crystal Palace", 2014, 2025)
 add_team_elo(elo_dict, "Everton", "Everton", 2014, 2025)
 add_team_elo(elo_dict, "Fulham", "Fulham", 2014, 2025)
-print(elo_dict["Arsenal"])
 #add_team_elo(elo_dict, "Huddersfield Town", "Huddersfield Town", 2014, 2025) #mangler tilføj selv
 add_team_elo(elo_dict, "Hull City", "Hull", 2014, 2025)
 add_team_elo(elo_dict, "Ipswich Town", "Ipswich", 2014, 2025)
 add_team_elo(elo_dict, "Leeds United", "Leeds", 2014, 2025)
 add_team_elo(elo_dict, "Leicester City", "Leicester", 2014, 2025)
-print(elo_dict["Arsenal"])
 add_team_elo(elo_dict, "Liverpool", "Liverpool", 2014, 2025)
 #add_team_elo(elo_dict, "Luton Town", "Luton Town", 2014, 2025) #mangler tilføj selv
 add_team_elo(elo_dict, "Manchester City", "Man City", 2014, 2025)
 add_team_elo(elo_dict, "Manchester United", "Man United", 2014, 2025)
 add_team_elo(elo_dict, "Middlesbrough", "Middlesbrough", 2014, 2025)
-print(elo_dict["Arsenal"])
 add_team_elo(elo_dict, "Newcastle United", "Newcastle", 2014, 2025)
 add_team_elo(elo_dict, "Norwich City", "Norwich", 2014, 2025)
 add_team_elo(elo_dict, "Nottingham Forest", "Forest", 2014, 2025)
 add_team_elo(elo_dict, "Queens Park Rangers", "QPR", 2014, 2025)
 add_team_elo(elo_dict, "Sheffield United", "Sheffield United", 2014, 2025)
-print(elo_dict["Arsenal"])
 add_team_elo(elo_dict, "Southampton", "Southampton", 2014, 2025)
 add_team_elo(elo_dict, "Stoke City", "Stoke", 2014, 2025)
 add_team_elo(elo_dict, "Sunderland", "Sunderland", 2014, 2025)
 add_team_elo(elo_dict, "Swansea City", "Swansea", 2014, 2025)
-print(elo_dict["Arsenal"])
 add_team_elo(elo_dict, "Tottenham Hotspur", "Tottenham", 2014, 2025)
 add_team_elo(elo_dict, "Watford", "Watford", 2014, 2025)
 add_team_elo(elo_dict, "West Bromwich Albion", "West Brom", 2014, 2025)
 add_team_elo(elo_dict, "West Ham United", "West Ham", 2014, 2025)
 add_team_elo(elo_dict, "Wolverhampton Wanderers", "Wolves", 2014, 2025)
 
+add_team_elo(elo_dict, "Cardiff City", "Cardiff", 2014, 2025) #mangler tilføj selv
+add_team_elo(elo_dict, "Huddersfield Town", "Huddersfield", 2014, 2025) #mangler tilføj selv
+add_team_elo(elo_dict, "Luton Town", "Luton", 2014, 2025) #mangler tilføj selv
 
+'''
 cardiff_elo = {
     2015: 1400,
     2016: 1400,
@@ -191,11 +188,11 @@ luton_elo = {
 }
 elo_dict["Cardiff City"] = cardiff_elo
 elo_dict["Huddersfield Town"] = huddersfield_elo
-elo_dict["Luton Town"] = luton_elo
+elo_dict["Luton Town"] = luton_elo'''
 
 # Gem én gang
 save_elo_dict_pickle(elo_dict, "elo_dict_premier_league.pkl")
 
 # …senere / i et nyt script:
 elo_dict = load_elo_dict_pickle("elo_dict_premier_league.pkl")
-print(elo_dict["Arsenal"])
+print(elo_dict)

@@ -28,7 +28,7 @@ ALIASES = {
 }
 
 # 1) Brug en liste af blokstørrelser (i rækkefølge) i stedet for SEASON_SIZE
-BLOCK_SIZES = [306, 306, 306, 306, 306, 306, 306, 306, 306, 18]
+BLOCK_SIZES = [306, 306, 306, 306, 306, 305, 306, 306, 306, 18]
 
 def clean(s):
     if pd.isna(s):

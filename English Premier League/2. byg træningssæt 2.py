@@ -54,6 +54,7 @@ columns_to_use = ["HjemmeholdNavn","HjemmeholdELO","HjemmeholdMal","HjemmeholdSk
                   "UdeholdPasses","UdeholdSuccesfulPasses","UdeholdPassAccuracy"]
 
 matches = pd.read_excel("English Premier League/Alle_kampe_med_elo_og_odds.xlsx", usecols=columns_to_use)
+matches2 = pd.read_excel("English Premier League/Alle_kampe_med_elo.xlsx")
 
 # 0) Byg long-form datasæt med hjemme/ude + modstander-statistik pr. kamp
 matches = matches.copy()
@@ -237,6 +238,7 @@ X = pd.concat([X, delta_block], axis=1)
 mask_complete = ~X.isna().any(axis=1)
 X_clean = X.loc[mask_complete].reset_index(drop=True)
 y_aligned = y.loc[mask_complete].reset_index(drop=True)
+match_results = matches2.loc[mask_complete].reset_index(drop=True)
 
 print(f"Form før filter: X={X.shape}, y={getattr(y, 'shape', (len(y),))}")
 print(f"Form efter filter: X={X_clean.shape}, y={y_aligned.shape}")
@@ -244,4 +246,5 @@ print(f"Form efter filter: X={X_clean.shape}, y={y_aligned.shape}")
 # 8) Gem til Excel
 X_clean.to_excel("English Premier League/X.xlsx", index=False)
 y_aligned.to_excel("English Premier League/Y.xlsx", index=False)
+match_results.to_excel("English Premier League/match_results.xlsx", index=False)
 print("Gemte 'X_features.xlsx' og 'y_aligned.xlsx'.")
