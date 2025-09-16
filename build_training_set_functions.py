@@ -49,10 +49,12 @@ def build_xy(cfg: XYConfig):
     # --- Y: læs tre sandsynlighedskolonner (samme som dine scripts) ---
     y_path = os.path.join(cfg.league_dir, cfg.matches_filename)
     # Læs hver kolonne separat for at matche din oprindelige tilgang
+    #MatchResult = pd.read_excel(y_path, usecols="B", nrows=cfg.y_nrows)
     HomeWinProb = pd.read_excel(y_path, usecols=cfg.y_cols[0], nrows=cfg.y_nrows)
     DrawProb    = pd.read_excel(y_path, usecols=cfg.y_cols[1], nrows=cfg.y_nrows)
     AwayWinProb = pd.read_excel(y_path, usecols=cfg.y_cols[2], nrows=cfg.y_nrows)
     y = pd.concat([HomeWinProb, DrawProb, AwayWinProb], axis=1)
+    #y = pd.concat([MatchResult,HomeWinProb, DrawProb, AwayWinProb], axis=1)
 
     # --- X: læs nødvendige kolonner ---
     columns_to_use = [

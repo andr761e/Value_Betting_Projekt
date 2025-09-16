@@ -6,9 +6,8 @@ from dataclasses import dataclass
 from lightgbm import LGBMRegressor, early_stopping
 from numpy.polynomial.polynomial import Polynomial
 
-pd.set_option('display.max_columns', None)
-pd.set_option('display.width', None)
-pd.set_option('display.max_colwidth', None)
+pd.set_option("display.max_columns", None)
+pd.set_option("display.width", 250)
 
 # ---------- Konfiguration ----------
 @dataclass
@@ -283,7 +282,7 @@ def predict_from_fixtures(fixtures_array, models, matches, elo_dict, stat_names,
         "Impl_H":implied[:,0], "Impl_U":implied[:,1], "Impl_A":implied[:,2],
         "Pred_H":preds[:,0], "Pred_U":preds[:,1], "Pred_A":preds[:,2],
         "PredOdds_H":pred_odds[:,0], "PredOdds_U":pred_odds[:,1], "PredOdds_A":pred_odds[:,2],
-        "Valid?(>=5)": valid
+        "(>=5)?": valid
     })
     out["Diff_H"] = out["Pred_H"] - out["Impl_H"]
     out["Diff_U"] = out["Pred_U"] - out["Impl_U"]

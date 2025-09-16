@@ -17,15 +17,15 @@ cfg = LeagueConfig(
 
 # Skriv ugens kampe her (samme format som før: home, away, oddsH, oddsU, oddsA)
 fixtures = np.array([
-    ["Marseille", "Lorient", 1.40, 4.50, 7.50],
-    ["Nice", "Nantes", 1.65, 3.60, 5.50],
-    ["Strasbourg", "Le Havre", 1.55, 3.90, 6.25],
-    ["Auxerre", "Monaco", 4.75, 4.10, 1.61],
-    ["Lille", "Toulouse", 1.80, 3.60, 4.50],
-    ["Brest", "Paris FC", 2.10, 3.40, 3.40],
-    ["Metz", "Angers", 2.10, 3.40, 3.40],
-    ["Paris Saint-Germain", "Lens", 1.27, 6.50, 8.00],
-    ["Rennes", "Lyon", 2.70, 3.60, 2.40]
+    ["Lyon", "Angers", 1.36, 4.75, 8.50],
+    ["Nantes", "Rennes", 3.50, 3.30, 2.10],
+    ["Brest", "Nice", 2.75, 3.50, 2.45],
+    ["Lens", "Lille", 2.45, 3.50, 2.70],
+    ["Paris FC", "Strasbourg", 2.45, 3.50, 2.75],
+    ["Monaco", "Metz", 1.27, 6.00, 10.00],
+    ["Auxerre", "Toulouse", 2.62, 3.30, 2.60],
+    ["Le Havre", "Lorient", 2.20, 3.40, 3.10],
+    ["Marseille", "Paris Saint-Germain", 3.40, 3.80, 2.00]
 ], dtype=object)
 
 df, xpred_path = run_pipeline(cfg, fixtures, calibrate=False)

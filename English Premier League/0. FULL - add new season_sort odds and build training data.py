@@ -7,7 +7,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from add_newest_season_functions import LeagueSeasonConfig, run_update
 from build_training_set_functions import XYConfig, build_xy
-
+'''
 cfg = LeagueSeasonConfig(
     league_dir="English Premier League",
     fixtures_url="https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures",
@@ -59,7 +59,7 @@ ALIASES = {
 }
 
 # 1) Brug en liste af blokstørrelser (i rækkefølge) i stedet for SEASON_SIZE
-BLOCK_SIZES = [380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 30]
+BLOCK_SIZES = [380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 380, 40]
 
 def clean(s):
     if pd.isna(s):
@@ -180,14 +180,14 @@ df_master["PROB A"] = probs_norm["PROB A"]
 master_out_path = "English Premier League/Alle_kampe_med_elo_og_odds.xlsx"
 df_master.to_excel(master_out_path, index=False)
 print(f"Master opdateret og gemt som {master_out_path}")
-
+'''
 cfg = XYConfig(
     league_dir="English Premier League",
     matches_filename="Alle_kampe_med_elo_og_odds.xlsx",
     y_cols=("AV", "AW", "AX"),   # præcis som dine filer
     y_nrows=7891,                # sæt evt. 7981 hvis du vil matche gamle runs 1:1
     out_X="X.xlsx",
-    out_Y="Y.xlsx",
+    out_Y="Y_odds.xlsx",
     rolling_window=5,
     include_delta=True
 )

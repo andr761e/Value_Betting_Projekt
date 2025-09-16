@@ -17,17 +17,18 @@ cfg = LeagueConfig(
 
 # Skriv ugens kampe her (samme format som før: home, away, oddsH, oddsU, oddsA)
 fixtures = np.array([
-    ["Arsenal", "Nottingham Forest", 1.40, 5.00, 7.50],
-    ["Bournemouth", "Brighton & Hove Albion", 2.45, 3.60, 2.75],
-    ["Crystal Palace", "Sunderland", 1.61, 3.90, 5.50],
-    ["Everton", "Aston Villa", 2.40, 3.30, 3.00],
-    ["Fulham", "Leeds United", 1.90, 3.50, 4.10],
-    ["Newcastle United", "Wolverhampton Wanderers", 1.44, 4.50, 7.50],
-    ["West Ham United", "Tottenham Hotspur", 3.30, 3.60, 2.10],
-    ["Brentford", "Chelsea", 4.50, 3.80, 1.75],
-    ["Burnley", "Liverpool", 9.50, 5.50, 1.30],
-    ["Manchester City", "Manchester United", 1.66, 4.00, 4.75]
+    ["Liverpool", "Everton", 1.48, 4.50, 6.25],
+    ["Brighton & Hove Albion", "Tottenham Hotspur", 2.20, 3.70, 3.00],
+    ["Burnley", "Nottingham Forest", 3.20, 3.40, 2.20],
+    ["West Ham United", "Crystal Palace", 2.87, 3.50, 2.35],
+    ["Wolverhampton Wanderers", "Leeds United", 2.60, 3.20, 2.87],
+    ["Manchester United", "Chelsea", 2.60, 3.80, 2.45],
+    ["Fulham", "Brentford", 2.00, 3.40, 3.75],
+    ["Bournemouth", "Newcastle United", 2.55, 3.60, 2.60],
+    ["Sunderland", "Aston Villa", 3.40, 3.50, 2.05],
+    ["Arsenal", "Manchester City", 1.90, 3.75, 3.80]
 ], dtype=object)
+
 
 df, xpred_path = run_pipeline(cfg, fixtures, calibrate=False)
 print(df)
